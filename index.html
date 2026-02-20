@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <style>
+        /* General Reset and Layout */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 0;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 10px 0;
+        }
+
+        /* Button Styling */
+        form {
+            margin-bottom: 40px;
+        }
+
+        button {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: #ffffff;
+            border: 3px solid #000000;
+            /* Hard shadow for a crisp B&W look */
+            box-shadow: 10px 10px 0px #000000; 
+            padding: 30px;
+                    width: 300px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Weather App</h1>
+
+            <form method="GET" action="/">
+                <input type="text" name="city" placeholder="Enter city" value="{{ request.args.get('city', '') }}" style="padding:12px; font-size:16px; width:220px;">
+                <button type="submit">Search</button>
+            </form>
+
+            {% if weather %}
+            <div class="card">
+                <h2>{{ weather.city }}</h2>
+                <p><strong>Temperature:</strong> {{ weather.temp }} °C</p>
+                <p><strong>Condition:</strong> {{ weather.description }}</p>
+                <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+            </div>
+            {% else %}
+            <p>Enter a city above and press Search to see the weather.</p>
+            {% endif %}
+
+        </body>
+        </html>
